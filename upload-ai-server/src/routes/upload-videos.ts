@@ -20,21 +20,23 @@ export async function uploadVideosRoute(app: FastifyInstance) {
 		const data = await req.file()
 
 		if (!data) {
-			return res.status(400).send({error: "Missing file input."})
+			return res.status(400).send({ error: "Missing file input." })
 		}
 
 		//check file extension
 		const extension = path.extname(data.filename) 
 		if (extension !== ".mp3") {
-			return res.status(400).send({error: "Invalid input type, please upload MP3."})
+			return res.status(400).send({error: "Invalid input type, please upload a MP3."})
 		}
 
 		//save filename - avoid registering files with the same name
 		const fileBaseName = path.basename(data.filename, extension)
 		const fileUploadName = `${fileBaseName}-${randomUUID()}${extension}`
-		// where the file will be saved (dir tmp in the project root)
+		// path where the videos will be saved
 		const uploadDestination = path.resolve(__dirname, '../../tmp', fileUploadName)
 
 		await pump(data.file, fs.createWriteStream(uploadDestination))
+
+		return res.send()
 	})
 }

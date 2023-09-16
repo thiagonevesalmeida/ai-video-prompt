@@ -4,7 +4,8 @@ import { uploadVideosRoute } from "./routes/upload-videos";
 
 const app = fastify()
 
-app.register(getAllPromptsRoute, uploadVideosRoute)
+app.register(getAllPromptsRoute)
+app.register(uploadVideosRoute)
 
 app.listen({
 	port: 3333,
