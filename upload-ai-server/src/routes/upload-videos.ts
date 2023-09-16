@@ -37,7 +37,7 @@ export async function uploadVideosRoute(app: FastifyInstance) {
 
 		await pump(data.file, fs.createWriteStream(uploadDestination)) //upload video on video destination
 
-		// create a video record in the database table
+		// register a video record in the database table
 		const video = await prisma.video.create({
 			data: {
 				name: data.filename,
