@@ -21,5 +21,5 @@ POST http://localhost:3333/videos/27d40053-802f-4c76-b66e-e647c4ed1b01/transcrip
 Content-Type: application/json
 
 {
-	"prompt": "thiago"
+	"prompt": "curso"
 }

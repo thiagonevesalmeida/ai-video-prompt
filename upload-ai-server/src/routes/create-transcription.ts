@@ -37,14 +37,22 @@ export async function createTranscriptionRoute(app: FastifyInstance) {
       prompt,
     })
 
+		// record video's transcription at database table
 
-		return response.text
+		const transcription = response.text
+		await prisma.video.update({
+			where: {
+				id: videoId,
+			},
+			data: {
+				transcription,
+			}
+		})
+
+		return { transcription }
 	})
 }
 /* possível erro:
-
-- Integração/Importação da lib openAi - certifique-se que está escrevendo openAi corretamente
-- route.http - prompt pode está dando erro
-- .env - API Keys
-- Erro na própria conexão da API da OPENAI
+- Transcrição não sendo realizada ao fazer o "create-transcription" request em route.http
+- Erro no server da API da OpenAI
 */
