@@ -38,7 +38,6 @@ export async function createTranscriptionRoute(app: FastifyInstance) {
     })
 
 		// record video's transcription at database table
-
 		const transcription = response.text
 		await prisma.video.update({
 			where: {
