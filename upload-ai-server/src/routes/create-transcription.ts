@@ -12,7 +12,7 @@ export async function createTranscriptionRoute(app: FastifyInstance) {
 		})
 
 		const bodySchema = z.object({
-			prompt: z.string()
+			prompt: z.string(),
 		})
 
 		const { videoId } = paramsSchema.parse(req.params) //receber parâmetro e validar se está seguindo a estrutura indicada por z.object
@@ -29,13 +29,14 @@ export async function createTranscriptionRoute(app: FastifyInstance) {
 
 		// add AI response
 		const response = await openai.audio.transcriptions.create({
-			file: audioReadStream,
-			model: 'whisper-1',
-			language: 'pt',
-			response_format: 'json',
-			temperature: 0,
-			prompt,
-		})
+      file: audioReadStream,
+      model: 'whisper-1',
+      language: 'pt',
+      response_format: 'json',
+      temperature: 0,
+      prompt,
+    })
+
 
 		return response.text
 	})
