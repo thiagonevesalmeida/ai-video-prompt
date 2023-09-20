@@ -1,6 +1,10 @@
 import { FFmpeg } from "@ffmpeg/ffmpeg"
 
-let ffmpeg: FFmpeg | null // ou null > pois precisamos carregar a biblioteca no momento que formos utilizar ela. Assim, enquanto ela não carregar terá a variável terá o valor null
+import coreURL from "../ffmpeg/ffmpeg-core.js?url"
+import wasmURL from "../ffmpeg/ffmpeg-core.wasm?url"
+import workerURL from "../ffmpeg/ffmpeg-worker.js?url"
+
+let ffmpeg: FFmpeg | null
 
 export async function getFFmpeg() {
 	if (ffmpeg) {
@@ -10,7 +14,11 @@ export async function getFFmpeg() {
 	ffmpeg = new FFmpeg()
 
 	if (!ffmpeg.loaded) {
-		await ffmpeg.load()
+		await ffmpeg.load({
+			coreURL,
+			wasmURL,
+			workerURL,
+		})
 	}
 
 	return ffmpeg
