@@ -79,7 +79,14 @@ export function VideoInputForm() {
 		data.append('file', audioFile)
 
 		const response = await api.post('/videos', data)
-		console.log(response.data)
+		const videoId = response.data.video.id
+
+		// generate video transcription
+		await api.post(`videos/${videoId}/transcription`, {
+			prompt,
+		})
+
+		console.log("finish")
 	}
 
 	const previewURL = useMemo(() => {
