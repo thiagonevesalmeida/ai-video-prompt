@@ -130,6 +130,7 @@ export function VideoInputForm() {
 				<Label htmlFor="transcription_prompt">Prompt de transcrição</Label>
 				<Textarea 
 					ref={promptInputRef}
+					disabled={status !== 'waiting'}
 					id="transcription_prompt" 
 					className="h-20 leading-relaxed resize-none"
 					placeholder="Inclua palavras-chave mencionadas no vídeo separadas por vírgula (,)"
