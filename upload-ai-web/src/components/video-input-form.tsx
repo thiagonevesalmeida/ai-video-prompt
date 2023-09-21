@@ -8,8 +8,12 @@ import { getFFmpeg } from "@/lib/ffmpeg";
 import { fetchFile } from "@ffmpeg/util";
 import { api } from "@/lib/axios";
 
+type Status = 'waiting' | 'converting' | 'uploading' | 'generating' | 'success'
+
 export function VideoInputForm() {
 	const [videoFile, setVideoFile] = useState<File | null>(null)
+	const [status, setStatus] = useState<Status>('waiting')
+
 	const promptInputRef = useRef<HTMLTextAreaElement>(null)
 	
 	function handleFileSelected(event: ChangeEvent<HTMLInputElement>) {
@@ -24,7 +28,6 @@ export function VideoInputForm() {
 		setVideoFile(selectedFile)
 	}
 
-	// converter o video em audio
 	async function convertVideoToAudio(video: File) {
 		console.log('Convert started.')
 
@@ -72,21 +75,26 @@ export function VideoInputForm() {
 			return
 		}
 
-		const audioFile = await convertVideoToAudio(videoFile) // convert video to audio
+		// convert video to audio
+		setStatus('converting')
+		const audioFile = await convertVideoToAudio(videoFile) 
 		
 		// upload audio to backend
 		const data = new FormData()
 		data.append('file', audioFile)
 
+		setStatus('uploading')
+
 		const response = await api.post('/videos', data)
 		const videoId = response.data.video.id
 
 		// generate video transcription
+		setStatus('generating')
 		await api.post(`videos/${videoId}/transcription`, {
 			prompt,
 		})
 
-		console.log("finish")
+		setStatus('success')
 	}
 
 	const previewURL = useMemo(() => {
@@ -128,7 +136,7 @@ export function VideoInputForm() {
 				/>
 			</div>
 
-			<Button type="submit" className="w-full">
+			<Button disabled={status !== 'waiting'} type="submit" className="w-full">
 				Carregar vídeo
 				<Upload className="w-4 h-4 ml-2"/>
 			</Button>
