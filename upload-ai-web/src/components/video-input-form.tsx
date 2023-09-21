@@ -52,7 +52,6 @@ export function VideoInputForm() {
 		])
 
 		const data = await ffmpeg.readFile('output.mp3')
-
 		const audioFileBlob = new Blob([data], { type: 'audio/mpeg' })
 		const audioFile = new File([audioFileBlob], 'audio.mp3', {
 			type: 'audio/mpeg',
@@ -72,11 +71,8 @@ export function VideoInputForm() {
 			return
 		}
 
-		// video convertido em audio
-		const audioFile = await convertVideoToAudio(videoFile)
-
-		console.log(audioFile)
-
+		const audioFile = await convertVideoToAudio(videoFile) // converter o video em audio
+		console.log(audioFile, prompt)
 	}
 
 	const previewURL = useMemo(() => {
