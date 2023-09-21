@@ -6,6 +6,7 @@ import { Label } from "./ui/label";
 import { ChangeEvent, FormEvent, useState, useMemo, useRef} from "react";
 import { getFFmpeg } from "@/lib/ffmpeg";
 import { fetchFile } from "@ffmpeg/util";
+import { api } from "@/lib/axios";
 
 export function VideoInputForm() {
 	const [videoFile, setVideoFile] = useState<File | null>(null)
@@ -71,8 +72,14 @@ export function VideoInputForm() {
 			return
 		}
 
-		const audioFile = await convertVideoToAudio(videoFile) // converter o video em audio
-		console.log(audioFile, prompt)
+		const audioFile = await convertVideoToAudio(videoFile) // convert video to audio
+		
+		// upload audio to backend
+		const data = new FormData()
+		data.append('file', audioFile)
+
+		const response = await api.post('/videos', data)
+		console.log(response.data)
 	}
 
 	const previewURL = useMemo(() => {
