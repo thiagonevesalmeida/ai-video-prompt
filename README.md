@@ -4,7 +4,7 @@
 </p>
 
 <p align="center">
-  <img alt="Upload.ai" src=".github/preview.png" width="100%">
+  <img alt="Upload.ai" src="./preview.png" width="100%">
 </p>
 
 ## 🚀 Technologies
