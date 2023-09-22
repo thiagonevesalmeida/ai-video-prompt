@@ -2,7 +2,7 @@
 
 ## 💻 Project 
 
-Application developed during Rocketseat NLW that allows you to upload videos and, through AI, automatically create eye-catching titles and descriptions with good indexing. 
+An AI-driven application that allows users to upload videos and automatically generates optimized titles and descriptions optimized for maximum visibility and engagement.
 The project was developed during the RocketSeat NLW. 🚀
 
 <p align="center">
