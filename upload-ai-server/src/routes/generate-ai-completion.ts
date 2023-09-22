@@ -5,7 +5,7 @@ import { prisma } from "../lib/prisma";
 import { openai } from "../lib/openai";
 
 export async function generateAICompletionRoute(app: FastifyInstance) {
-	app.post('/ai/complete', async (request, reply) => {
+	app.post('/ai/complete', async (req, reply) => {
 		// validate request data
 		const bodySchema = z.object({
 			videoId: z.string().uuid(),
@@ -13,7 +13,7 @@ export async function generateAICompletionRoute(app: FastifyInstance) {
 			temperature: z.number().min(0).max(1).default(0.5),
 		})
 
-		const { videoId, prompt ,temperature } = bodySchema.parse(request.body)
+		const { videoId, prompt ,temperature } = bodySchema.parse(req.body)
 
 		//AI completion
 		//procurar e retornar video, caso não retornar erro
