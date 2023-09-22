@@ -1,7 +1,9 @@
 <h1 align="center">Upload-ai</h1>
 
-<p align="center">Application that allows you to upload videos and, through AI, automatically create eye-catching titles and descriptions with good indexing. 🚀</p>
-</p>
+## 💻 Project 
+
+Application developed during Rocketseat NLW that allows you to upload videos and, through AI, automatically create eye-catching titles and descriptions with good indexing. 
+The project was developed during the RocketSeat NLW. 🚀
 
 <p align="center">
   <img alt="Upload.ai" src="./preview.png" width="100%">
