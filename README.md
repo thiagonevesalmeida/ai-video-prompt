@@ -1,4 +1,4 @@
-<h1 align="center">Upload-ai</h1>
+<h1 align="center">Upload.ai</h1>
 
 ## 💻 Project 
 
