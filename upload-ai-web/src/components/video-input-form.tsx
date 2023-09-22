@@ -27,8 +27,7 @@ export function VideoInputForm(props: VideoInputFormProps) {
 			return
 		}
 
-		const selectedFile = files[0] // file presente no input "type: files" é sempre um array, pois pode permitir o input de múltiplos arquivos caso insira o atributo "multiples". Como desejamos apenas o primeiro = files[0]
-
+		const selectedFile = files[0]
 		setVideoFile(selectedFile)
 	}
 
@@ -38,7 +37,6 @@ export function VideoInputForm(props: VideoInputFormProps) {
 		const ffmpeg = await getFFmpeg()
 		await ffmpeg.writeFile('input.mp4', await fetchFile(video))
 
-		// Em caso de erro, retirar comentário para verificar o print do erro
 		// ffmpeg.on('log', log => {
 		// 	console.log(log)
 		// })
