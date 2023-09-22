@@ -16,21 +16,19 @@ export async function generateAICompletionRoute(app: FastifyInstance) {
 		const { videoId, prompt ,temperature } = bodySchema.parse(req.body)
 
 		//AI completion
-		//procurar e retornar video, caso não retornar erro
 		const video = await prisma.video.findUniqueOrThrow({
 			where: {
 				id: videoId,
 			}
 		})
 
-		// se não existir transcrição no video, retornar um erro
 		if (!video.transcription) {
 			return reply.status(400).send({ error: "Video transcription was not generated yet."})
 		}
 		
-		const promptMessage = prompt.replace('{transcription}', video.transcription) //substituir parte da template message ('{transcription}') enviada no "Request Body" pelo video transcription gerado pela AI
+		const promptMessage = prompt.replace('{transcription}', video.transcription)
 
-		// Chamada para OpenAI
+		// Call to OpenAI
 		const response = await openai.chat.completions.create({
 			model: 'gpt-3.5-turbo-16k',
 			temperature,
