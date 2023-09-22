@@ -15,8 +15,8 @@ export async function createTranscriptionRoute(app: FastifyInstance) {
 			prompt: z.string(),
 		})
 
-		const { videoId } = paramsSchema.parse(req.params) //receber parâmetro e validar se está seguindo a estrutura indicada por z.object
-		const { prompt } = bodySchema.parse(req.body) //receber Request Body e validar se está seguindo a estrutura indicada por z.object
+		const { videoId } = paramsSchema.parse(req.params)
+		const { prompt } = bodySchema.parse(req.body)
 
 		// video transcription
 		const video = await prisma.video.findUniqueOrThrow({
@@ -51,7 +51,3 @@ export async function createTranscriptionRoute(app: FastifyInstance) {
 		return { transcription }
 	})
 }
-/* possível erro:
-- Transcrição não sendo realizada ao fazer o "create-transcription" request em route.http
-- Erro no server da API da OpenAI
-*/
