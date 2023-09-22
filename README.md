@@ -29,7 +29,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - ffmpeg
 - Git & GitHub
 
-## Documentation
+## 📚 Documentation
 
 ### upload-ai-web (Frontend
 The Front end, built with React, offers a user-friendly interface for generating text. Key features include:
